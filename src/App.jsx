@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [error, setError] = useState({ email: "", password: "" });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setEmail({ email: "", password: "" });
+
+    if (!email.includes("@")) {
+      setError({ ...error, email: "email must have @ sympol" });
+      return;
+    }
+    if (password.length < 8) {
+      setError({
+        ...error,
+        password: "password must be at least 8 charctars",
+      });
+      return;
+    }
+
+    console.log("submited");
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <form action="" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="ex: example@co.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        {error.email && <p>{error.email}</p>}
+        <input
+          type="password"
+          placeholder="ex: Ss@1122334455"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {error.password && <p>{error.password}</p>}
+
+        <button>submit</button>
+      </form>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
