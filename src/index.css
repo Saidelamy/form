@@ -1,6 +1,18 @@
 form {
   display: flex;
   flex-direction: column;
-  gap: 10;
+  gap: 10px;
   font-size: xx-large;
+  justify-content: center;
+  align-items: center;
+}
+input,
+button {
+  padding: 20px 40px;
+  width: 500px;
+}
+form p {
+  font-size: large;
+  text-align: start;
+  color: red;
 }
